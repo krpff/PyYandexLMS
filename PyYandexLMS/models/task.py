@@ -30,7 +30,7 @@ class TaskType(BaseModel):
     type: str
     color: str
     order: int
-    tasks: List[BaseTask]
+    tasks: Optional[Union[List[BaseTask], None]]
 
 
 class File(BaseModel):
@@ -40,7 +40,7 @@ class File(BaseModel):
     mime_type: str
     encoding: str
     size: int
-    run_id: str
+    run_id: Union[str, None]
     added_time: datetime
 
 

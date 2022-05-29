@@ -38,7 +38,7 @@ class Comment(BaseModel):
 
 
 class Solution(BaseSolution):
-    deadline: datetime
+    deadline: Union[datetime, None]
     task: BaseTask
     student: BaseUser
     has_activity_after_deadline: bool
