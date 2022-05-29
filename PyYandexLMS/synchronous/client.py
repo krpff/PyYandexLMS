@@ -4,7 +4,7 @@ from typing import List, Union
 
 from requests import Session
 
-from PyYandexLMS.errors import AuthError
+from PyYandexLMS.errors import AuthError, ApiError
 from PyYandexLMS.models.base import BaseSolution
 from PyYandexLMS.models.course import Course
 from PyYandexLMS.models.lesson import BaseLesson, Lesson
@@ -104,6 +104,8 @@ class Client(Session):
             params={"courseId": course_id, "groupId": group_id},
         ).json()
 
+        if "code" in lessons:
+            raise ApiError(lessons["code"])
         return [BaseLesson.parse_obj(lesson) for lesson in lessons]
 
     def get_lesson(self, lesson_id: int, course_id: int, group_id: int) -> Lesson:
